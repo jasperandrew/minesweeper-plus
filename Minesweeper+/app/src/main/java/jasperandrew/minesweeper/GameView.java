@@ -30,7 +30,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     public void update() {
         tap_manager.update();
-        if(!Const.GAME_OVER)
+        if(Const.gameState != Const.GameState.OVER)
             scoreboard.update();
     }
 

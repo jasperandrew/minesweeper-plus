@@ -52,7 +52,7 @@ class Block {
     Const.State getState() { return state; }
 
     void draw(Canvas canvas) {
-        if(!Const.GAME_OVER){
+        if(Const.gameState != Const.GameState.OVER){
             switch(state){
                 case BLOCK:
                     canvas.drawBitmap(block_imgs.get(0), null, rect, new Paint());

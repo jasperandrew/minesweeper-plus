@@ -32,20 +32,23 @@ class Scoreboard {
 
     void init() {
         stopwatch.reset();
-        stopwatch.start();
         curr_img = playing_img;
         bombs = Const.NUM_COLUMNS*Const.NUM_ROWS/Const.EASINESS;
-        Const.GAME_OVER = false;
+        Const.gameState = Const.GameState.READY;
+    }
+
+    void startTheClock() {
+        stopwatch.start();
     }
 
     void winState() {
         curr_img = win_img;
-        Const.GAME_OVER = true;
+        Const.gameState = Const.GameState.OVER;
     }
 
     void loseState() {
         curr_img = lose_img;
-        Const.GAME_OVER = true;
+        Const.gameState = Const.GameState.OVER;
     }
 
     private String bombString() {

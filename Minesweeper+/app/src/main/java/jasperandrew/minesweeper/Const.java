@@ -19,5 +19,9 @@ class Const {
         BLOCK, FLAG, NUM
     }
 
-    static boolean GAME_OVER = false;
+    enum GameState {
+        READY, RUNNING, OVER
+    }
+
+    static GameState gameState = GameState.READY;
 }
