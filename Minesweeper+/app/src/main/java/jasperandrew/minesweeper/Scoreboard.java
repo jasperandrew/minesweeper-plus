@@ -19,13 +19,13 @@ class Scoreboard {
         stopwatch = new StopWatch();
 
         text_paint = new Paint();
-        text_paint.setTypeface(Const.FONT);
-        text_paint.setColor(Color.WHITE);
+        text_paint.setTypeface(Const.FONT); // Theme font
+        text_paint.setColor(Color.BLACK); // Theme font color
         text_paint.setTextSize(80);
 
-        //shift_up =
+        shift_up = (Const.SCREEN_HEIGHT - Const.BLOCK_WIDTH*Const.NUM_ROWS - height)/2;
 
-        gamestate_rect = new Rect(Const.SCREEN_WIDTH/2 - height/2, Const.SCREEN_HEIGHT-height, Const.SCREEN_WIDTH/2 + height/2, Const.SCREEN_HEIGHT);
+        gamestate_rect = new Rect(Const.SCREEN_WIDTH/2 - height/2, Const.SCREEN_HEIGHT-height-shift_up, Const.SCREEN_WIDTH/2 + height/2, Const.SCREEN_HEIGHT-shift_up);
         playing_img = BitmapFactory.decodeResource(context.getResources(), R.drawable.classic_block);
         win_img = BitmapFactory.decodeResource(context.getResources(), R.drawable.classic_flag);
         lose_img = BitmapFactory.decodeResource(context.getResources(), R.drawable.classic_bomb);
@@ -58,8 +58,8 @@ class Scoreboard {
     void updateBombNum(int n) { bombs += n; }
 
     void draw(Canvas canvas) {
-        canvas.drawText(stopwatch.toString(), 140, Const.SCREEN_HEIGHT-25, text_paint);
-        canvas.drawText(bombString(), Const.SCREEN_WIDTH-290, Const.SCREEN_HEIGHT-25, text_paint);
+        canvas.drawText(stopwatch.toString(), 140, Const.SCREEN_HEIGHT-25-shift_up, text_paint);
+        canvas.drawText(bombString(), Const.SCREEN_WIDTH-295, Const.SCREEN_HEIGHT-25-shift_up, text_paint);
         canvas.drawBitmap(curr_img, null, gamestate_rect, new Paint());
     }
 

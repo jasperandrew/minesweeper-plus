@@ -24,3 +24,12 @@ class Const {
 
     static GameState gameState = GameState.READY;
 }
+
+/*
+Theme members:
+    - background color
+    - number images
+    - block_images
+    - font color
+    - font
+ */

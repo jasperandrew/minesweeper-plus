@@ -15,7 +15,7 @@ class BlockManager {
     BlockManager(Context context, int easiness) {
         this.easiness = easiness;
 
-        num_imgs = new ArrayList<>();
+        num_imgs = new ArrayList<>(); // Theme number images
         num_imgs.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.classic_0));
         num_imgs.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.classic_1));
         num_imgs.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.classic_2));
@@ -27,7 +27,7 @@ class BlockManager {
         num_imgs.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.classic_8));
         num_imgs.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.classic_bomb));
 
-        block_imgs = new ArrayList<>();
+        block_imgs = new ArrayList<>(); // Theme block images
         block_imgs.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.classic_block));
         block_imgs.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.classic_flag));
         block_imgs.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.classic_flag_wrong));

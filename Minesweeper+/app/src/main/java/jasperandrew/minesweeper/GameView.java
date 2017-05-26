@@ -2,6 +2,7 @@ package jasperandrew.minesweeper;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -37,6 +38,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
+        canvas.drawColor(Color.LTGRAY); // Theme background color
         block_manager.draw(canvas);
         scoreboard.draw(canvas);
     }
