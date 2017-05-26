@@ -26,7 +26,7 @@ class Block {
     int reveal() {
         if(state == Const.State.BLOCK){
             state = Const.State.NUM;
-            if(value == 9) GameView.scoreboard.loseState();
+            if(value == 9) GameView.scoreboard.gameOver(false);
             return value == 0 ? 0 : 1;
         }
         return -1;
@@ -35,11 +35,11 @@ class Block {
     boolean toggleFlag() {
         if(state == Const.State.FLAG){
             state = Const.State.BLOCK;
-            GameView.scoreboard.changeBombs(1);
+            GameView.scoreboard.updateBombNum(1);
             return true;
         }else if(state == Const.State.BLOCK){
             if(GameView.scoreboard.numBombs() == 0) return false;
-            GameView.scoreboard.changeBombs(-1);
+            GameView.scoreboard.updateBombNum(-1);
             state = Const.State.FLAG;
             if(GameView.scoreboard.numBombs() == 0) GameView.block_manager.checkWin();
             return true;

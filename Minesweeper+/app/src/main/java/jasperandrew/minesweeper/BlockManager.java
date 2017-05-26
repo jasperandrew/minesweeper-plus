@@ -8,10 +8,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 class BlockManager {
+    private int easiness, num_bombs;
     private ArrayList<ArrayList<Block>> board;
     private ArrayList<Bitmap> num_imgs, block_imgs;
 
-    BlockManager(Context context) {
+    BlockManager(Context context, int easiness) {
+        this.easiness = easiness;
+
         num_imgs = new ArrayList<>();
         num_imgs.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.classic_0));
         num_imgs.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.classic_1));
@@ -48,10 +51,10 @@ class BlockManager {
 
     private int[][] generateGrid() {
         int[][] grid = new int[Const.NUM_COLUMNS][Const.NUM_ROWS];
-        int bombs = Const.NUM_COLUMNS*Const.NUM_ROWS/Const.EASINESS;
         int cols = Const.NUM_COLUMNS-1;
         int rows = Const.NUM_ROWS-1;
         Random r = new Random();
+        int bombs = num_bombs = Const.NUM_COLUMNS*Const.NUM_ROWS/easiness + r.nextInt(8)-4;
 
         while(bombs > 0){
             int x = r.nextInt(Const.NUM_COLUMNS-1);
@@ -84,6 +87,8 @@ class BlockManager {
         return grid;
     }
 
+    int numBombs() { return num_bombs; }
+
     boolean revealBlocks(int col, int row) {
         int blockType = getBlock(col, row).reveal();
         int cols = Const.NUM_COLUMNS-1;
@@ -112,7 +117,7 @@ class BlockManager {
                 if(block.getValue() == 9 && block.getState() != Const.State.FLAG) return;
             }
         }
-        GameView.scoreboard.winState();
+        GameView.scoreboard.gameOver(true);
     }
 
     void draw(Canvas canvas) {

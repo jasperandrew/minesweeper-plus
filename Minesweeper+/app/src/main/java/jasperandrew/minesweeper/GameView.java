@@ -17,7 +17,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         getHolder().addCallback(this);
         thread = new MainThread(getHolder(), this);
 
-        block_manager = new BlockManager(context);
+        block_manager = new BlockManager(context, 7);
         block_manager.init();
 
         tap_manager = new TapManager(context);

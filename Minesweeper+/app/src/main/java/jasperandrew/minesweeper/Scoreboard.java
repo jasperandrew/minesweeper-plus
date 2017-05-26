@@ -9,20 +9,21 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 
 class Scoreboard {
-    private int bombs;
+    private int bombs, shift_up;
     private StopWatch stopwatch;
     private Paint text_paint;
     private Rect gamestate_rect;
     private Bitmap playing_img, win_img, lose_img, curr_img;
 
     Scoreboard(int height, Context context) {
-        bombs = Const.NUM_COLUMNS*Const.NUM_ROWS/Const.EASINESS;
         stopwatch = new StopWatch();
 
         text_paint = new Paint();
         text_paint.setTypeface(Const.FONT);
         text_paint.setColor(Color.WHITE);
         text_paint.setTextSize(80);
+
+        //shift_up =
 
         gamestate_rect = new Rect(Const.SCREEN_WIDTH/2 - height/2, Const.SCREEN_HEIGHT-height, Const.SCREEN_WIDTH/2 + height/2, Const.SCREEN_HEIGHT);
         playing_img = BitmapFactory.decodeResource(context.getResources(), R.drawable.classic_block);
@@ -33,7 +34,7 @@ class Scoreboard {
     void init() {
         stopwatch.reset();
         curr_img = playing_img;
-        bombs = Const.NUM_COLUMNS*Const.NUM_ROWS/Const.EASINESS;
+        bombs = GameView.block_manager.numBombs();
         Const.gameState = Const.GameState.READY;
     }
 
@@ -41,13 +42,8 @@ class Scoreboard {
         stopwatch.start();
     }
 
-    void winState() {
-        curr_img = win_img;
-        Const.gameState = Const.GameState.OVER;
-    }
-
-    void loseState() {
-        curr_img = lose_img;
+    void gameOver(boolean won) {
+        curr_img = won ? win_img : lose_img;
         Const.gameState = Const.GameState.OVER;
     }
 
@@ -59,7 +55,7 @@ class Scoreboard {
 
     int numBombs() { return bombs; }
 
-    void changeBombs(int n) { bombs += n; }
+    void updateBombNum(int n) { bombs += n; }
 
     void draw(Canvas canvas) {
         canvas.drawText(stopwatch.toString(), 140, Const.SCREEN_HEIGHT-25, text_paint);

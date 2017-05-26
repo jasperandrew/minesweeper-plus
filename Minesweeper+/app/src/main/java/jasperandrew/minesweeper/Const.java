@@ -11,7 +11,6 @@ class Const {
     static int BLOCK_WIDTH;
     static int NUM_COLUMNS;
     static int NUM_ROWS;
-    static int EASINESS = 10;
 
     static Typeface FONT;
 

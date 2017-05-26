@@ -52,17 +52,17 @@ class TapManager {
     }
 
     void update() {
-        if(tap_start != 0 && (SystemClock.elapsedRealtime() - tap_start)/1000.0 >= 0.35){
+        if(tap_start != 0 && (SystemClock.elapsedRealtime() - tap_start)/1000.0 >= 0.30){
             if(Const.gameState == Const.GameState.OVER){
                 GameView.resetGame();
-                vibe.vibrate(200);
+                vibe.vibrate(100);
                 tap_start = 0;
                 return;
             }
-            System.out.println("hi");
+
             if(x < Const.NUM_COLUMNS*Const.BLOCK_WIDTH && y < Const.NUM_ROWS*Const.BLOCK_WIDTH
                     && GameView.block_manager.getBlock(blockUnit(x), blockUnit(y)).toggleFlag()){
-                vibe.vibrate(100);
+                vibe.vibrate(70);
             }
             tap_start = 0;
         }
