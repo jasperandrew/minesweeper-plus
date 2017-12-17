@@ -7,14 +7,14 @@ import android.graphics.Canvas;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static jasperandrew.minesweeper.GameView.scoreboard;
+
 class BlockManager {
-    private int easiness, num_bombs;
+    private int num_bombs;
     private ArrayList<ArrayList<Block>> board;
     private ArrayList<Bitmap> num_imgs, block_imgs;
 
-    BlockManager(Context context, int easiness) {
-        this.easiness = easiness;
-
+    BlockManager(Context context) {
         num_imgs = new ArrayList<>(); // Theme number images
         num_imgs.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.classic_0));
         num_imgs.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.classic_1));
@@ -47,14 +47,18 @@ class BlockManager {
             }
             board.add(tmp);
         }
+
+        GameView.scoreboard.init();
     }
 
     private int[][] generateGrid() {
         int[][] grid = new int[Const.NUM_COLUMNS][Const.NUM_ROWS];
         int cols = Const.NUM_COLUMNS-1;
         int rows = Const.NUM_ROWS-1;
+
         Random r = new Random();
-        int bombs = num_bombs = Const.NUM_COLUMNS*Const.NUM_ROWS/easiness + r.nextInt(8)-4;
+        int bombs = num_bombs = Const.NUM_COLUMNS*Const.NUM_ROWS/Const.E + r.nextInt(8)-4;
+        if(bombs < 1) bombs = num_bombs = 1;
 
         while(bombs > 0){
             int x = r.nextInt(Const.NUM_COLUMNS-1);
@@ -117,7 +121,7 @@ class BlockManager {
                 if(block.getValue() == 9 && block.getState() != Const.State.FLAG) return;
             }
         }
-        GameView.scoreboard.gameOver(true);
+        scoreboard.gameOver(true);
     }
 
     void draw(Canvas canvas) {

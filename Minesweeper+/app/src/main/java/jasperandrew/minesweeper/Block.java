@@ -15,7 +15,7 @@ class Block {
 
     Block(int col, int row, int value, Bitmap num_img, ArrayList<Bitmap> block_imgs) {
         int startX = Const.BLOCK_WIDTH * col;
-        int startY = Const.BLOCK_WIDTH * row;
+        int startY = Const.BLOCK_WIDTH * row + Const.SCOREBOARD_HEIGHT;
         this.rect = new Rect(startX, startY, startX+Const.BLOCK_WIDTH, startY+Const.BLOCK_WIDTH);
         this.value = value;
         this.num_img = num_img;

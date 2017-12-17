@@ -18,13 +18,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         getHolder().addCallback(this);
         thread = new MainThread(getHolder(), this);
 
-        block_manager = new BlockManager(context, 7);
-        block_manager.init();
-
+        block_manager = new BlockManager(context);
         tap_manager = new TapManager(context);
+        scoreboard = new Scoreboard(context);
 
-        scoreboard = new Scoreboard(100, context);
-        scoreboard.init();
+        initBoard();
 
         setFocusable(true);
     }
@@ -44,6 +42,17 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public static void resetGame() {
+        initBoard();
+    }
+
+    public static void initBoard() {
+        Const.NUM_COLUMNS = Const.C;
+        Const.BLOCK_WIDTH = Const.SCREEN_WIDTH / Const.NUM_COLUMNS;
+        Const.NUM_ROWS = (Const.SCREEN_HEIGHT - 100) / Const.BLOCK_WIDTH;
+
+        Const.SCOREBOARD_HEIGHT = Const.SCREEN_HEIGHT - (Const.NUM_ROWS*Const.BLOCK_WIDTH);
+        System.out.println("BW " + Const.BLOCK_WIDTH*Const.NUM_COLUMNS);
+        System.out.println("SW " + Const.SCREEN_WIDTH);
         block_manager.init();
         scoreboard.init();
     }
