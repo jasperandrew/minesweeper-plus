@@ -1,2 +1,3 @@
 # minesweeper+
-(in development) Minesweeper for Android
+Minesweeper for Android
+A college game dev course project
